@@ -1,0 +1,58 @@
+/*aula do dia 27/04*/
+
+/*manipular string*/
+
+Use bank;
+
+select first_name, length(first_name)
+from employee;
+
+select position('MI' in first_name)
+from employee;
+
+select locate ('ch', first_name, 3)
+from employee;
+/*Comparação de string:
+-1 caso a string apareça antes
+0, caso as strings sejam identicas
+1, caso a primeira apareça apos a segunda*/
+
+
+select strcmp('12345', '12345') 12345_12345;
+select strcmp('abcd', 'xyz') abcd_xyz;
+select strcmp('xyz', 'qrstuv')xyz_qrstuv;
+
+select concat (first_name, '', last_name,'', 'possuib ttitulo de', title, 'desde', start_date)
+from employee
+where title = 'teller' or title = 'Head Teller';
+
+/*Funçoes aritimeticas*/
+select mod (10,4); /*resto da divisao*/
+select pow (2, 8); /*potencia*/
+/*Controlando precisao numerica*/
+select ceil(72.455), floor(72.455);
+select truncate(72.0909, 1), truncate(72.0909, 2),
+truncate(72.0909,3);
+
+/*modificando os formatos*/
+select date_format(start_date, '%d/%m/%Y') as data_formatada
+from employee;
+
+/*função de agregação*/
+select max(avail_balance) max_balance, min(avail_balance),
+avg(avail_balance) media_balance, sum(avail_balance) soma_balance,
+count(*) num_accounts
+from account
+where product_cd = 'CHK';
+
+select max(avail_balance) max_balance, min(avail_balance),
+avg(avail_balance) media_balance, sum(avail_balance) soma_balance,
+count(*) num_accounts
+from account
+group by product_cd;
+
+/*Usando expressões*/
+
+select extract(year from start_date) year, count(*) how_many
+from employee
+group by extract(year from start_date);
