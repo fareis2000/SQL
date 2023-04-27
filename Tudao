@@ -1,0 +1,115 @@
+use bank;
+
+/*AULA 16_03_2023*/
+/*select * (O asterisco é para pegar tudo
+from employee;*/
+
+/*select dept_id, name
+from department;*/
+
+/*
+Abaixo é ensinando a como criar um novo campo, usar uma coluna alterada e deixar tudo em CAPSLOCK
+Porém, nada disso influência os banco de dados, é só uma observação
+
+select emp_id,'ACTIVE', emp_id *3.14159, UPPER(last_name)
+from employee;
+*/
+
+/*select VERSION(), USER(), DATABASE();*/
+
+/*Alias (Serve basicamente para renomear as tabelas, não necessariamente precisa do AS no SQL
+select emp_id,'ACTIVE' AS status, emp_id *3.14159 AS empid_x_pi, 
+UPPER(last_name) AS last_name_upper
+from employee;
+*/
+
+/*
+o DISTINCT serve para eliminar repetições dentro de uma tabela
+select distinct cust_id 
+from account;
+*/
+/*
+Basicamente para criar uma visualização dentro de uma visualização
+select e.emp_id, e.first_name, e.last_name
+from (select emp_id, first_name, last_name from employee) e;
+*/
+
+/*
+Isso é para criar uma nova "tabela" que é uma conexão de várias visualizações que permite a alteração dos dados
+Sem necessariamente infligir um dano para a tabela principal
+create view employee_vw AS 
+select emp_id, first_name, last_name,
+YEAR(start_date) start_year
+from employee;
+
+
+select emp_id, start_year
+from employee_vw;
+*/
+
+/*
+Isso basicamente serve para encurtar o trabalho
+select employee.emp_id, employee.first_name,
+department.name
+from employee INNER JOIN department
+ON employee.dept_id = department.dept_id
+*/
+
+/*AULA DO DIA 23/03/2023*/
+
+/*
+O Where é basicamente o IF da linguagem em SQL, onde ele só vai selecionar
+as colunas de certa tabela se a especificação dentro do Where for verdadeira
+SELECT emp_id, first_name, last_name, start_date, title
+FROM employee
+WHERE title = 'Head Teller';
+
+SELECT emp_id, first_name, last_name, start_date, title
+FROM employee
+WHERE title = 'Head Teller' AND start_date > '2003-01-01';
+
+SELECT emp_id, first_name, last_name, start_date, title
+FROM employee
+WHERE title = 'Head Teller' OR start_date > '2003-01-01';
+
+SELECT emp_id, first_name, last_name, start_date, title
+FROM employee
+WHERE (title = 'Head Teller' AND start_date > '2003-01-01')
+OR (title = 'Teller' AND start_date > '2003-01-01';
+*/
+
+/*
+SELECT d.name, count(e.emp_id) num_employees
+FROM department d INNER JOIN employee e 
+ON d.dept_id = e.dept_id
+GROUP BY d.name
+HAVING count(e.emp_id) > 2;*/
+
+/*
+select open_emp_id, produt_cd 
+from account 
+order by open_emp_id;*/
+ 
+ /*
+select open_emp_id, product_cd 
+from account 
+order by open_emp_id, product_cd;*/
+
+/*
+select account_id, product_cd, open_date, avail_balance
+from account 
+order by avail_balance desc;*/
+
+/*
+select cust_id, cust_type_cd, city , state, fed_id
+from customer
+order by right( fed_id, 3);*/
+
+/*	
+select emp_id, title, start_date, first_name, last_name
+from employee
+order by 2,3;*/
+
+select emp_id , first_name , last_name
+from employee
+order by first_
